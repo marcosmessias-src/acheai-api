@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('announces', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            $table->text('title');
+            $table->longText('description');
+            $table->integer('status')->default('1');
+            $table->longText('address');
+            $table->double('reward');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class AnnounceController extends Controller
      */
     public function index()
     {
-        //
+        return Announce::paginate(10);
     }
 
     /**
@@ -25,7 +25,11 @@ class AnnounceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Announce::create($request->all())){
+            return response('Anúncio criado com sucesso!', 201);
+        }else{
+            return response('Erro ao criar anúncio!', 400);
+        }
     }
 
     /**
@@ -36,7 +40,7 @@ class AnnounceController extends Controller
      */
     public function show(Announce $announce)
     {
-        //
+        return $announce;
     }
 
     /**
@@ -48,7 +52,11 @@ class AnnounceController extends Controller
      */
     public function update(Request $request, Announce $announce)
     {
-        //
+        if($announce->update($request->all())){
+            return response('Anúncio editado com sucesso!', 201);
+        }else{
+            return response('Erro ao editar anúncio!', 400);
+        }
     }
 
     /**
@@ -59,6 +67,10 @@ class AnnounceController extends Controller
      */
     public function destroy(Announce $announce)
     {
-        //
+        if($announce->delete()){
+            return response('Anúncio deletado com sucesso!', 200);
+        }else{
+            return response('Erro ao deletar anúncio!', 400);
+        }
     }
 }
